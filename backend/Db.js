@@ -1,14 +1,24 @@
-const mongoose=require("mongoose")
+const mongoose = require('mongoose');
 
-// const url ="mongodb+srv://rajulthakur:rajulthakur18@clusterdsa.f9n6h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const url = "mongodb://localhost:27017/DsaReviser";
-// mongodb+srv://rajulthakur:<password>@clusterdsa.f9n6h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-// const url ="mongodb+srv://rajul-thakur:mongowithRJ@18@cluster0.2illf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const connect = () => {
+    try {
+        mongoose.connect("mongodb+srv://thakurajul1022:jZ5A7AVjcmB0D80t@cluster0.mgfv1bu.mongodb.net/");
 
-const connectToMongo = ()=>{
-    mongoose.connect(url,()=>{
-        console.log('connected successfull');
-    })
+        const connection = mongoose.connection;
+
+        connection.on('connected', () => {
+            console.log('database connected successfully');
+        })
+
+        connection.on('error', (error) => {
+            console.log('please make sure your database is running fine!' + error);
+            process.exit();
+        })
+
+    } catch (error) {
+        console.log('connection error' + error.message);
+    }
+
 }
 
-module.exports = connectToMongo
+module.exports = connect;

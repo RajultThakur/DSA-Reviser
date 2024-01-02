@@ -24,8 +24,7 @@ function Login() {
             localStorage.setItem("token",json.token);
             setUser({ email: "", password: "" });
             history.push("/");
-            setIsLogin(true);
-            
+             
         }else{
             alert("invalid details")
         }

@@ -24,7 +24,7 @@ router.post("/signup", async (req, res) => {
             email,
             password: encryptedPassword
         })
-        // await user.save();
+        await user.save();
         success = true
         res.status(201).json({ success, user });
     } catch (error) {
