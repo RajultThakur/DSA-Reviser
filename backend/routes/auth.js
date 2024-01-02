@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
                 name: user.name,
                 email: user.email
             },
-            process.env.SECRET_KEY
+            "APPDEVELOPERRJ@18"
         )
         success = true
         res.status(201).json({ success, token });
