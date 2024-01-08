@@ -50,9 +50,9 @@ router.post("/login", async (req, res) => {
             return res.status(400).json("Please try to login with valid details");
         }
 
-        const comparepass = await bcrypt.compare(password, user.password)
+        const comparePassword = await bcrypt.compare(password, user.password)
 
-        if (!comparepass) {
+        if (!comparePassword) {
             success = false
             return res.status(401).json({ success, mes: "invalid details" });
         }
@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
                 name: user.name,
                 email: user.email
             },
-            "APPDEVELOPERRJ@18"
+            process.env.SECRET_KEY
         )
         success = true
         res.status(201).json({ success, token });
@@ -75,35 +75,35 @@ router.post("/login", async (req, res) => {
 
 })
 
-router.post("/getotp",(req,res) => {
+// router.post("/getotp",(req,res) => {
 
-    const {to,name} = req.body;
+//     const {to,name} = req.body;
 
-    const otp = Math.floor(Math.random()*(99999-10000)-10000);
-const transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-        user:"solve.dsa.questions@gmail.com",
-        pass:"DSAsolverwithyourself"
-    }
-});
+//     const otp = Math.floor(Math.random()*(99999-10000)-10000);
+// const transporter = nodemailer.createTransport({
+//     service:"gmail",
+//     auth:{
+//         user:"solve.dsa.questions@gmail.com",
+//         pass:"DSAsolverwithyourself"
+//     }
+// });
 
-const options = {
-    from:'solve.dsa.questions@gmail.com',
-    to:to,
-    subject:"OTP to sing_up into DSA-solver",
-    html: `<h1>Hello ${name} <h2>welcome to DSA-solver</h2></h1> <br> <h3> your otp is :<h2> ${otp}</h2></h3>`
-};
+// const options = {
+//     from:'solve.dsa.questions@gmail.com',
+//     to:to,
+//     subject:"OTP to sing_up into DSA-solver",
+//     html: `<h1>Hello ${name} <h2>welcome to DSA-solver</h2></h1> <br> <h3> your otp is :<h2> ${otp}</h2></h3>`
+// };
 
-transporter.sendMail(options,(err,info) => {
-    if(err){
-        console.log(err);
-        return res.status(401).json({err});
-        }
-    else return res.status(201).json({otp});
-})
-}
-)
+// transporter.sendMail(options,(err,info) => {
+//     if(err){
+//         console.log(err);
+//         return res.status(401).json({err});
+//         }
+//     else return res.status(201).json({otp});
+// })
+// }
+// )
 
 router.post("/getuser", fetchUser, async (req, res) => {
     console.log(req.user)
