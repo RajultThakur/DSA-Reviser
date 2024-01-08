@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {Link ,useHistory } from "react-router-dom"
 import Zoom from "react-reveal/Zoom"
-const url = "http://localhost:5000/api/auth";
+import { BACKEND_URL } from '../../config/config';
+const url = `${BACKEND_URL}/api/auth`;
 function Signup() {
     const history = useHistory();
     const [user, setUser] = useState({ name: "", email: "", password: "" });

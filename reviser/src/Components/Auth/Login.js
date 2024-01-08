@@ -1,11 +1,13 @@
-import React,{useState,useContext} from 'react'
+import React,{useState} from 'react'
 import {Link,useNavigate } from "react-router-dom"
 import Zoom from "react-reveal/Zoom"
-import DsaContext from '../../Context/DsaContext';
-const url = "http://localhost:5000/api/auth";
+import { BACKEND_URL } from '../../config/config';
+// import DsaContext from '../../Context/DsaContext';
+
+const url = `${BACKEND_URL}/api/auth`;
 function Login() {
-    const context = useContext(DsaContext);
-    const {setIsLogin} = context;
+    // const context = useContext(DsaContext);
+    // const {setIsLogin} = context;
     const history = useNavigate()
     const [user, setUser] = useState({ email: "", password: "" })
 

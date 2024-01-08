@@ -1,0 +1,1 @@
+export const BACKEND_URL="https://dsa-reviser-backend-sduh.onrender.com"

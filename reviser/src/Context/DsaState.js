@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import DsaContext from './DsaContext'
 import Data from './Data'
+import { BACKEND_URL } from '../config/config'
 
-const url = "http://localhost:5000/api/question"
-const taskUrl ="http://localhost:5000/api/task" 
+const url = `${BACKEND_URL}/api/question`
+const taskUrl =`${BACKEND_URL}/api/task` 
 const DsaState = (props) => {
 
   const [Topics, setTopics] = useState([]); //for storing topics

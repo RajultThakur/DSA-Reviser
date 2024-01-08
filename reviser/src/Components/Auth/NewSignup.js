@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 // import image from './Images/amazon.png'
 import Zoom from "react-reveal/Zoom"
 import { Link, useNavigate } from 'react-router-dom'
-const url = "http://localhost:5000/api/auth"
+import { BACKEND_URL } from '../../config/config';
+const url = `${BACKEND_URL}/api/auth`;
 function Signup () {
     const [user, setUser] = useState({ name: "", email: "", password: "" })
     const [fillOtp, setFillotp] = useState(0);
@@ -70,7 +71,11 @@ function Signup () {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('dsa_token')) history.push('/');
+        if (localStorage.getItem('dsa_token'))
+        {
+            history('/');
+        } 
+        return () => {}
     }, [])
 
     return (
