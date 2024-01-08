@@ -3,7 +3,7 @@ import Navbar from './Components/Navbar';
 import DsaState from './Context/DsaState'
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
 } from "react-router-dom"
 import Home from './Components/Home';
@@ -16,21 +16,20 @@ function App() {
     <DsaState>
   <Router>
   <Navbar />
-     <Switch>
-       <Route exact path = "/">
-         <Home/>
+     <Routes>
+       <Route exact path = "/" element = {<Home/>}>
+         
        </Route>
-       <Route exact path = "/login">
-         <div className="container">
+       <Route exact path = "/login" element = {<div className="container">
          <Login />
-         </div>
+         </div>}>
+         
        </Route>
-       <Route exact path = "/signup">
-      <div className="container">
-       <NewSignup></NewSignup>
-       </div>
+       <Route exact path = "/signup" element = {<div className="container">
+       <NewSignup/>
+       </div>}>
        </Route>
-     </Switch>
+     </Routes>
    </Router>
    </DsaState>
   )

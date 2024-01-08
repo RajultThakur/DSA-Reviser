@@ -25,22 +25,23 @@ function Signup() {
         if (json.success === true) {
             // console.log(json.user);
             alert("registred successfull")
-            setshowOtpSection(0);
-            const response2 = await fetch(`${url}/getotp`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json',
-                },
-                body: JSON.stringify({ name: user.name, to: user.email, password: user.password })
-            });
+            // setshowOtpSection(0);
+            history.push("/")
+            // const response2 = await fetch(`${url}/getotp`, {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": 'application/json',
+            //     },
+            //     body: JSON.stringify({ name: user.name, to: user.email, password: user.password })
+            // });
     
-            const otp = await response2.json();
-            console.log(otp.otp); 
-            setOTP(otp.otp);
+            // const otp = await response2.json();
+            // console.log(otp.otp); 
+            // setOTP(otp.otp);
     
         }else if(json.msg ==="user exist"){
           alert("user already exist. Please try to login")
-          history.push("/login")
+        //   history.push("/login")
         } else {
             alert( "Invalid details")
         }
@@ -52,7 +53,7 @@ function Signup() {
         e.preventDefault();
         // console.log(e.target.otp.value);
         if(OTP.toString() === e.target.otp.value ){
-            alert("verifyed succesfull")
+            alert("verified successful")
             history.push("/login");
         }
         else {
@@ -73,7 +74,7 @@ function Signup() {
     return (
         <Zoom top>
         <div style={{border:"1px solid"}}>
-            {showOtpSection?
+            {/* {showOtpSection? */}
              <form onSubmit ={submit} className="signup-form my-1">
                  <h3>Register hear!</h3>
             <div className="my-1">
@@ -91,14 +92,15 @@ function Signup() {
             
             <button type="submit" className="btn mt-1 btn-primary">SignUp</button>
             <p className="note">*If already have account <Link className="auth" to="/login" role="button">login</Link> </p>
-        </form>:
+        </form>
+        {/* :
         <form onSubmit={fillotp}>
         <div className="my-1">
                 <label htmlFor="exampleInputEmail1" className="form-label">Enter otp</label>
                 <input  name="otp"  type="number" className="formcontrol" id="exampleInputEmail1" aria-describedby="emailHelp" required={true} />
             </div>
             <button type="submit" className="btn mt-1 btn-primary">go</button>
-        </form>}
+        </form>} */}
         </div>
         </Zoom>
     )

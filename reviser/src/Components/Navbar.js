@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import LightSpeed from 'react-reveal/LightSpeed';
-import { Link,useHistory } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 import DsaContext from '../Context/DsaContext';
 function Navbar () {
   const context = useContext(DsaContext)
   const {IsLogin,setIsLogin} = context;
-  const history = useHistory();
+  const history = useNavigate();
   const logout = () => {
-    localStorage.removeItem("token");
-    history.push('/login')
+    localStorage.removeItem("dsa_token");
+    history('/login')
     setIsLogin(false);
   }
   return (

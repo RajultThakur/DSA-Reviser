@@ -91,7 +91,7 @@ input[type="checkBox"]:checked::after{
 
 .daily-task{
   color: white;
-  height: 345px;
+  /* height: 398px; */
   padding: 10px;
   border-radius: 13px;
   background: #2b2b4c;

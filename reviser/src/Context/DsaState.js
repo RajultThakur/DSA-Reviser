@@ -69,7 +69,7 @@ const DsaState = (props) => {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({ idx })
@@ -82,7 +82,7 @@ const DsaState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
     });
@@ -109,7 +109,7 @@ const DsaState = (props) => {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({ idx, que_hint })
@@ -122,7 +122,7 @@ const DsaState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
     });
@@ -136,7 +136,7 @@ const DsaState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
     });
@@ -150,7 +150,7 @@ const DsaState = (props) => {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({ tasks })
@@ -164,7 +164,7 @@ const DsaState = (props) => {
       method: 'DELETE',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({ str })
@@ -174,14 +174,14 @@ const DsaState = (props) => {
     
   }
 
-  const [RamdomQuestions, setRamdomQuestions] = useState()
+  const [RamdomQuestions, setRandomQuestions] = useState()
 
   const random_question = (index,dsa) => {
-    let topicWiseQuestions ;
+    let topicWiseQuestions = [];
     let c=0;
     for (const key of Object.keys(Data)) {
-     
       if(c===dsa){
+        console.log(Data[key],"++++++")
         topicWiseQuestions = Data[key]; 
         break;
       }
@@ -189,7 +189,6 @@ const DsaState = (props) => {
     }
     const randomQuestion =[];
     for(let i=0;i<3;i++){
-      console.log(topicWiseQuestions[index[i]]);
        randomQuestion.push(topicWiseQuestions[index[i]]);
     }
     return randomQuestion;
@@ -201,14 +200,19 @@ const DsaState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
     });
 
     const data = await response.json();
+    console.log(data)
+    // console.log(data,"data")
     setSelectedTopic(data.dsa)
-    setRamdomQuestions(random_question(data.questionNumber,data.dsa));
+    // console.log(data.questionNumber,"data_question number")
+    // console.log(data.dsa,"data dsa")
+    const randomQuestionData = random_question(data.questionNumber,data.dsa)
+    setRandomQuestions(randomQuestionData);
   }
 
   const chooseTopic = async(quantity,dsa,len) => {
@@ -216,7 +220,7 @@ const DsaState = (props) => {
       method: 'PUT',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({quantity,dsa,len})
@@ -225,9 +229,9 @@ const DsaState = (props) => {
     setSelectedTopic(data.dsa);
     console.log(data);
     if(data!=="limit over")
-    setRamdomQuestions(random_question(data.questionNumber,data.dsa));
+    setRandomQuestions(random_question(data.questionNumber,data.dsa));
     else
-    setRamdomQuestions("No question")
+    setRandomQuestions("No question")
 
   }
   const updeteOnce = async() => {
@@ -235,7 +239,7 @@ const DsaState = (props) => {
       method: 'PUT',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({})
@@ -243,7 +247,7 @@ const DsaState = (props) => {
     const data = await response.json();
     // console.log(data);
     if(data.sucess)
-    setRamdomQuestions(random_question(data.questionNumber,data.dsa));
+    setRandomQuestions(random_question(data.questionNumber,data.dsa));
     // else alert('we are unable to updete question')
   }
   const [bookmark, setbookmark] = useState()
@@ -254,7 +258,7 @@ const DsaState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
     });
@@ -273,7 +277,7 @@ const DsaState = (props) => {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json',
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("dsa_token")
         ,
       },
       body: JSON.stringify({idx})

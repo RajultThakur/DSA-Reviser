@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import image from './Images/amazon.png'
 import Zoom from "react-reveal/Zoom"
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const url = "http://localhost:5000/api/auth"
 function Signup () {
     const [user, setUser] = useState({ name: "", email: "", password: "" })
@@ -9,7 +9,7 @@ function Signup () {
     const [OTP, setOTP] = useState("");
     const [myOTP, setmyOTP] = useState("");
     const [finalUserData, setUserData] = useState({});
-    const history = useHistory();
+    const history = useNavigate();
     const fillOTP = (e) => {
         setOTP(e.target.value);
 
@@ -34,7 +34,7 @@ function Signup () {
 
         if (data.success === false) {
             alert(data.mes);
-            history.push('/login')
+            history('/login')
         }
 
         else {
@@ -63,14 +63,14 @@ function Signup () {
                 },
                 body: JSON.stringify({ name: finalUserData.user.name, email: finalUserData.user.email, password: finalUserData.user.password })
             });
-            history.push("/login");
+            history("/login");
         } else {
             alert('wrong otp')
         }
     }
 
     useEffect(() => {
-        if (localStorage.getItem('token')) history.push('/');
+        if (localStorage.getItem('dsa_token')) history.push('/');
     }, [])
 
     return (

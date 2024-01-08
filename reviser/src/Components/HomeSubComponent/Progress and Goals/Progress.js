@@ -1,5 +1,5 @@
 import React from 'react'
-import Loder from '../../Loder';
+import Loder from '../../Loader';
 import Fade from "react-reveal/Fade"
 function Progress(props) {
   const {question,bookmark,lode} = props

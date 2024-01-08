@@ -9,37 +9,37 @@ import Hints from './HomeSubComponent/Hints';
 import ShowHints from './HomeSubComponent/ShowHints';
 import RandomTopic from './HomeSubComponent/RandomQue/RandomTopic';
 import PracticeQuestion from './HomeSubComponent/RandomQue/PracticeQuestion';
-import Loder from './Loder';
+import Loader from './Loader';
 import OneRandomQue from './OneRandomQue';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Home () {
     const context = useContext(DsaContext);
-    const {bookMarkedQuestion,lode, getBookmark,bookmark,allQuestions, setIsLogin, updeteOnce, RamdomQuestions, Topics, Questions, getMarkedQuestions, markedQuestions, getHints, getDataForRandomQue, OneRandom } = context;
-    const [loding, setloding] = useState(true)
+    const {bookMarkedQuestion,lode, getBookmark,bookmark,allQuestions, setIsLogin, RamdomQuestions, Topics, Questions, getMarkedQuestions, markedQuestions, getHints, getDataForRandomQue, OneRandom } = context;
+    const [loading, setloading] = useState(true)
     let coutn = 0, count2 = 0;
     let str = "No question"
-    const history = useHistory();
+    const history = useNavigate();
     useEffect(() => {
         const fun = async () => {
-            if (localStorage.getItem('token')) {
+            if (localStorage.getItem('dsa_token')) {
                 setIsLogin(1);
                 allQuestions();
                 await getMarkedQuestions();
                 await getHints();
                 await getDataForRandomQue();
                 await getBookmark();
-                setloding(false)
+                setloading(false)
                 // await updeteOnce();
                 setIsLogin(true);
             } else {
-                history.push('/login')
+                history('/login')
             }
         }
         fun();
         // eslint-disable-next-line
     }, [])
     return (<>
-        {localStorage.getItem("token") && <div className="app-container">
+        {localStorage.getItem("dsa_token") && <div className="app-container">
             <div className='main-container'>
                 <div className='randomQuestionContainer'>
                     <Fade left>
@@ -55,18 +55,18 @@ function Home () {
                             {color:'#0D92A8'}}>Q</span>uestions!</h1>
 </Fade>
                    
-                    {loding ? <Loder /> : <div className="random_question">
+                    {loading ? <Loader /> : <div className="random_question">
                     <Fade>{RamdomQuestions !== str?<table className="table">
                             <tbody>{RamdomQuestions.map((ele)=>{ return <PracticeQuestion key={Math.random()} que={ele} topic={Topics} /> })}</tbody>
                         </table> : <h3 style ={{padding:"45px"}}>All questions completed selected other topic or refresh the page</h3>}</Fade>
 
-                        <p style={{ float: "right", color: "#75df1a" }}><strong>NOTE*</strong> Question will update daily on the basis of selected topic!</p>
+                        <p style={{ float: "right", color: "#75df1a", }}><strong>NOTE*</strong> Question will update daily on the basis of selected topic!</p>
 
                     </div>}
 
                 </div>
 
-                <div className="hide">.</div>
+                {/* <div className="hide">.</div> */}
                 <Fade left >
                 <div className='question_and_topic_container'>
 

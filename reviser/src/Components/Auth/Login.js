@@ -1,12 +1,12 @@
 import React,{useState,useContext} from 'react'
-import {Link,useHistory } from "react-router-dom"
+import {Link,useNavigate } from "react-router-dom"
 import Zoom from "react-reveal/Zoom"
 import DsaContext from '../../Context/DsaContext';
 const url = "http://localhost:5000/api/auth";
 function Login() {
     const context = useContext(DsaContext);
     const {setIsLogin} = context;
-    const history = useHistory()
+    const history = useNavigate()
     const [user, setUser] = useState({ email: "", password: "" })
 
     const handleSubmit = async (e) => {
@@ -21,9 +21,9 @@ function Login() {
         });
         const json = await response.json();
         if(json.success===true){
-            localStorage.setItem("token",json.token);
+            localStorage.setItem("dsa_token",json.token);
             setUser({ email: "", password: "" });
-            history.push("/");
+            history("/");
              
         }else{
             alert("invalid details")
